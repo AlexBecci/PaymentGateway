@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Footer } from '../components/Footer';
 
 interface MainLayoutProps {
     children: ReactNode;
@@ -6,9 +7,10 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
     return (
-        <div>
-            <Header />
-            <main>{children}</main>
+        <div className='min-h-screen w-full flex flex-col'>
+            <div className='flex-1 flex  justify-center items-center'>
+                <main>{children}</main>
+            </div>
             <Footer />
         </div>
     );
@@ -20,11 +22,4 @@ const Header = () => {
             <h1>Bitnovo Payment Gateway</h1>
         </div>
     )
-}
-const Footer = () => {
-    return (
-        <footer>
-            <p>&copy; 2023 Bitnovo</p>
-        </footer>
-    );
 }

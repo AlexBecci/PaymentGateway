@@ -1,135 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const PaymentSummary = ({ }) => {
+    const [isVisible, setIsVisible] = useState<boolean>(false)
 
-    /* return (
-        <div className="min-h-screen p-8 text-[#002859]">
-            <div className="max-w-4xl mx-auto">
-                <div className="grid md:grid-cols-2 gap-4 ">
-                    <div className="p-2 h-full">
-                        <h2 className="text-base font-semibold ">Resumen del pedido</h2>
-                        <div className="space-y-4 p-8 bg-[#F9FAFC] rounded-lg shadow-sm ">
-                            <div className="flex justify-between  ">
-                                <span className="">Importe:</span>
-                                <span className="font-medium ">56,06 EUR</span>
-                            </div>
-                            <Line />
-                            <div className="flex justify-between  ">
-                                <span className="">Moneda seleccionada:</span>
-                                <div className="flex items-center">
-                                    <div className="w-5 h-5  rounded-full mr-2">
-                                        <img alt="IMAGE" src="https://payments.pre-bnvo.com/media/crytocurrencies/CryptoBCH_Size36_px_TT7Td9Q.png" />
-                                    </div>
-                                    <span>XRP</span>
-                                </div>
-                            </div>
-                            <Line />
-                            <div className="flex justify-between  ">
-                                <span className="">Comercio:</span>
-                                <div className="flex items-center">
-                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4" d="M11.2499 2.45009C11.9399 1.86009 13.0699 1.86009 13.7699 2.45009L15.3499 3.81009C15.6499 4.07009 16.2099 4.28009 16.6099 4.28009H18.3099C19.3699 4.28009 20.2399 5.15009 20.2399 6.21009V7.91009C20.2399 8.30009 20.4499 8.87009 20.7099 9.17009L22.0699 10.7501C22.6599 11.4401 22.6599 12.5701 22.0699 13.2701L20.7099 14.8501C20.4499 15.1501 20.2399 15.7101 20.2399 16.1101V17.8101C20.2399 18.8701 19.3699 19.7401 18.3099 19.7401H16.6099C16.2199 19.7401 15.6499 19.9501 15.3499 20.2101L13.7699 21.5701C13.0799 22.1601 11.9499 22.1601 11.2499 21.5701L9.66988 20.2101C9.36988 19.9501 8.80988 19.7401 8.40988 19.7401H6.67988C5.61988 19.7401 4.74988 18.8701 4.74988 17.8101V16.1001C4.74988 15.7101 4.53988 15.1501 4.28988 14.8501L2.93988 13.2601C2.35988 12.5701 2.35988 11.4501 2.93988 10.7601L4.28988 9.17009C4.53988 8.87009 4.74988 8.31009 4.74988 7.92009V6.20009C4.74988 5.14009 5.61988 4.27009 6.67988 4.27009H8.40988C8.79988 4.27009 9.36988 4.06009 9.66988 3.80009L11.2499 2.45009Z" fill="#15BBE0" />
-                                        <path d="M11.2901 15.1701C11.0901 15.1701 10.9001 15.0901 10.7601 14.9501L8.34006 12.5301C8.05006 12.2401 8.05006 11.7601 8.34006 11.4701C8.63006 11.1801 9.11006 11.1801 9.40006 11.4701L11.2901 13.3601L15.5901 9.06009C15.8801 8.77009 16.3601 8.77009 16.6501 9.06009C16.9401 9.35009 16.9401 9.83009 16.6501 10.1201L11.8201 14.9501C11.6801 15.0901 11.4901 15.1701 11.2901 15.1701Z" fill="#15BBE0" />
-                                    </svg>
+    useEffect(() => {
+        //usamos el timeout para controlar la animacion
+        const timer = setTimeout(() => {
+            setIsVisible(true)
+        }, 200)
+        //limpiamos el timeout cuando el componetne se desmonte
+        return () => clearTimeout(timer)
+    }, [])
 
-                                    <span className="text-sm">Comercio de pruebas de Semega</span>
-                                </div>
-                            </div>
-                            <div className="flex justify-between  ">
-                                <span className="">Fecha:</span>
-                                <span>21/01/2022 08:52</span>
-                            </div>
-                            <Line />
-                            <div className="flex justify-between  ">
-                                <span className="">Concepto:</span>
-                                <span>Viajes & Ocio</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=" h-full">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-base font-semibold ">Realiza el pago</h2>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg shadow-xl mb-6">
-                            <div className="flex justify-center mb-8 items-center text-gray-500">
-                                <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                                    <path strokeWidth="2" d="M12 6v6l4 2" />
-                                </svg>
-                                <span>05:08</span>
-                            </div>
-                            <div className="flex justify-center gap-4 mb-8">
-                                <button className="px-3 py-1 bg-[#035AC5] text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
-                                    Smart QR
-                                </button>
-                                <button className="px-3 py-1 bg-[#F9FAFC] text-[#647184] border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors">
-                                    Web3
-                                </button>
-                            </div>
-                  
-                            <div className="w-32 h-32 mx-auto mb-8 p-4 rounded-xl shadow-xl bg-white">
-                                <svg viewBox="0 0 100 100" className="w-full h-full">
-                                    <path d="M0,0 h100v100h-100z" fill="white" />
-                                    <path d="M10,10 h35v35h-35z M15,15 h25v25h-25z" fill="black" />
-                                    <path d="M55,10 h35v35h-35z M60,15 h25v25h-25z" fill="black" />
-                                    <path d="M10,55 h35v35h-35z M15,60 h25v25h-25z" fill="black" />
-                                    <path d="M55,55 h35v35h-35z" fill="black" />
-                                    <path d="M60,60 h25v25h-25z" fill="white" />
-                                </svg>
-                            </div>
-
-                            <div className="space-y-4 ">
-                                <div className="flex justify-center items-center ">
-                                    <span className=" text-sm">Enviar : <span className="font-semibold">108,02 XRP</span></span>
-                                    <button className=" ml-2 text-blue-600 hover:text-blue-700">
-                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path
-                                                strokeWidth="2"
-                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div className="flex justify-center items-center   space-x-2">
-                                    <span className=" text-sm break-words">
-                                        {code}
-                                    </span>
-                                    <button className="text-blue-600 hover:text-blue-700">
-                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path
-                                                strokeWidth="2"
-                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div className="flex justify-center items-center  ">
-                                    <svg className="w-5 h-5 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4" d="M21.08 8.58003V15.42C21.08 16.54 20.4799 17.58 19.5099 18.15L13.5699 21.58C12.5999 22.14 11.3999 22.14 10.4199 21.58L4.47992 18.15C3.50992 17.59 2.90991 16.55 2.90991 15.42V8.58003C2.90991 7.46003 3.50992 6.41999 4.47992 5.84999L10.4199 2.42C11.3899 1.86 12.5899 1.86 13.5699 2.42L19.5099 5.84999C20.4799 6.41999 21.08 7.45003 21.08 8.58003Z" fill="#EAB308" />
-                                        <path d="M12 10.5C12.41 10.5 12.75 10.84 12.75 11.25L12.75 16.5C12.75 16.91 12.41 17.25 12 17.25C11.59 17.25 11.25 16.91 11.25 16.5L11.25 11.25C11.25 10.84 11.59 10.5 12 10.5Z" fill="#002859" />
-                                        <path d="M12 7.00014C12.13 7.00014 12.26 7.03016 12.38 7.08016C12.51 7.13016 12.61 7.20012 12.71 7.29012C12.8 7.39012 12.87 7.50014 12.93 7.62014C12.98 7.74014 13 7.87014 13 8.00014C13 8.26014 12.9 8.52016 12.71 8.71016C12.61 8.80016 12.51 8.87012 12.38 8.92012C12.01 9.08012 11.57 8.99016 11.29 8.71016C11.2 8.61016 11.13 8.51015 11.08 8.38015C11.03 8.26015 11 8.13014 11 8.00014C11 7.87014 11.03 7.74014 11.08 7.62014C11.13 7.50014 11.2 7.39012 11.29 7.29012C11.48 7.10012 11.73 7.00014 12 7.00014Z" fill="#002859" />
-                                    </svg>
-
-                                    <span className=" text-sm">Etiqueta de destino: 255716461</span>
-                                    <button className=" ml-2 text-blue-600 hover:text-blue-700">
-                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                            <path
-                                                strokeWidth="2"
-                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    ) */
     return (
-        <div className="min-h-screen text-[#002859]  p-8 flex items-center justify-center">
+        <div className={` text-[#002859]  p-8 flex items-center justify-center transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="max-w-5xl w-full mx-auto">
                 <div className="grid md:grid-cols-2 gap-6">
                     {/* Left Column - Order Summary */}
@@ -144,7 +28,6 @@ export const PaymentSummary = ({ }) => {
             </div>
         </div>
     );
-
 }
 
 const OrderSummary = () => {
@@ -304,3 +187,133 @@ const Line = () => {
         <h1 className="h-[0.2px]  bg-[#C0CCDA] w-full"></h1>
     )
 }
+
+
+
+
+/* return (
+        <div className="min-h-screen p-8 text-[#002859]">
+            <div className="max-w-4xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-4 ">
+                    <div className="p-2 h-full">
+                        <h2 className="text-base font-semibold ">Resumen del pedido</h2>
+                        <div className="space-y-4 p-8 bg-[#F9FAFC] rounded-lg shadow-sm ">
+                            <div className="flex justify-between  ">
+                                <span className="">Importe:</span>
+                                <span className="font-medium ">56,06 EUR</span>
+                            </div>
+                            <Line />
+                            <div className="flex justify-between  ">
+                                <span className="">Moneda seleccionada:</span>
+                                <div className="flex items-center">
+                                    <div className="w-5 h-5  rounded-full mr-2">
+                                        <img alt="IMAGE" src="https://payments.pre-bnvo.com/media/crytocurrencies/CryptoBCH_Size36_px_TT7Td9Q.png" />
+                                    </div>
+                                    <span>XRP</span>
+                                </div>
+                            </div>
+                            <Line />
+                            <div className="flex justify-between  ">
+                                <span className="">Comercio:</span>
+                                <div className="flex items-center">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4" d="M11.2499 2.45009C11.9399 1.86009 13.0699 1.86009 13.7699 2.45009L15.3499 3.81009C15.6499 4.07009 16.2099 4.28009 16.6099 4.28009H18.3099C19.3699 4.28009 20.2399 5.15009 20.2399 6.21009V7.91009C20.2399 8.30009 20.4499 8.87009 20.7099 9.17009L22.0699 10.7501C22.6599 11.4401 22.6599 12.5701 22.0699 13.2701L20.7099 14.8501C20.4499 15.1501 20.2399 15.7101 20.2399 16.1101V17.8101C20.2399 18.8701 19.3699 19.7401 18.3099 19.7401H16.6099C16.2199 19.7401 15.6499 19.9501 15.3499 20.2101L13.7699 21.5701C13.0799 22.1601 11.9499 22.1601 11.2499 21.5701L9.66988 20.2101C9.36988 19.9501 8.80988 19.7401 8.40988 19.7401H6.67988C5.61988 19.7401 4.74988 18.8701 4.74988 17.8101V16.1001C4.74988 15.7101 4.53988 15.1501 4.28988 14.8501L2.93988 13.2601C2.35988 12.5701 2.35988 11.4501 2.93988 10.7601L4.28988 9.17009C4.53988 8.87009 4.74988 8.31009 4.74988 7.92009V6.20009C4.74988 5.14009 5.61988 4.27009 6.67988 4.27009H8.40988C8.79988 4.27009 9.36988 4.06009 9.66988 3.80009L11.2499 2.45009Z" fill="#15BBE0" />
+                                        <path d="M11.2901 15.1701C11.0901 15.1701 10.9001 15.0901 10.7601 14.9501L8.34006 12.5301C8.05006 12.2401 8.05006 11.7601 8.34006 11.4701C8.63006 11.1801 9.11006 11.1801 9.40006 11.4701L11.2901 13.3601L15.5901 9.06009C15.8801 8.77009 16.3601 8.77009 16.6501 9.06009C16.9401 9.35009 16.9401 9.83009 16.6501 10.1201L11.8201 14.9501C11.6801 15.0901 11.4901 15.1701 11.2901 15.1701Z" fill="#15BBE0" />
+                                    </svg>
+
+                                    <span className="text-sm">Comercio de pruebas de Semega</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between  ">
+                                <span className="">Fecha:</span>
+                                <span>21/01/2022 08:52</span>
+                            </div>
+                            <Line />
+                            <div className="flex justify-between  ">
+                                <span className="">Concepto:</span>
+                                <span>Viajes & Ocio</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className=" h-full">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-base font-semibold ">Realiza el pago</h2>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-xl mb-6">
+                            <div className="flex justify-center mb-8 items-center text-gray-500">
+                                <svg className="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                                    <path strokeWidth="2" d="M12 6v6l4 2" />
+                                </svg>
+                                <span>05:08</span>
+                            </div>
+                            <div className="flex justify-center gap-4 mb-8">
+                                <button className="px-3 py-1 bg-[#035AC5] text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                                    Smart QR
+                                </button>
+                                <button className="px-3 py-1 bg-[#F9FAFC] text-[#647184] border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors">
+                                    Web3
+                                </button>
+                            </div>
+                  
+                            <div className="w-32 h-32 mx-auto mb-8 p-4 rounded-xl shadow-xl bg-white">
+                                <svg viewBox="0 0 100 100" className="w-full h-full">
+                                    <path d="M0,0 h100v100h-100z" fill="white" />
+                                    <path d="M10,10 h35v35h-35z M15,15 h25v25h-25z" fill="black" />
+                                    <path d="M55,10 h35v35h-35z M60,15 h25v25h-25z" fill="black" />
+                                    <path d="M10,55 h35v35h-35z M15,60 h25v25h-25z" fill="black" />
+                                    <path d="M55,55 h35v35h-35z" fill="black" />
+                                    <path d="M60,60 h25v25h-25z" fill="white" />
+                                </svg>
+                            </div>
+
+                            <div className="space-y-4 ">
+                                <div className="flex justify-center items-center ">
+                                    <span className=" text-sm">Enviar : <span className="font-semibold">108,02 XRP</span></span>
+                                    <button className=" ml-2 text-blue-600 hover:text-blue-700">
+                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path
+                                                strokeWidth="2"
+                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div className="flex justify-center items-center   space-x-2">
+                                    <span className=" text-sm break-words">
+                                        {code}
+                                    </span>
+                                    <button className="text-blue-600 hover:text-blue-700">
+                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path
+                                                strokeWidth="2"
+                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div className="flex justify-center items-center  ">
+                                    <svg className="w-5 h-5 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path opacity="0.4" d="M21.08 8.58003V15.42C21.08 16.54 20.4799 17.58 19.5099 18.15L13.5699 21.58C12.5999 22.14 11.3999 22.14 10.4199 21.58L4.47992 18.15C3.50992 17.59 2.90991 16.55 2.90991 15.42V8.58003C2.90991 7.46003 3.50992 6.41999 4.47992 5.84999L10.4199 2.42C11.3899 1.86 12.5899 1.86 13.5699 2.42L19.5099 5.84999C20.4799 6.41999 21.08 7.45003 21.08 8.58003Z" fill="#EAB308" />
+                                        <path d="M12 10.5C12.41 10.5 12.75 10.84 12.75 11.25L12.75 16.5C12.75 16.91 12.41 17.25 12 17.25C11.59 17.25 11.25 16.91 11.25 16.5L11.25 11.25C11.25 10.84 11.59 10.5 12 10.5Z" fill="#002859" />
+                                        <path d="M12 7.00014C12.13 7.00014 12.26 7.03016 12.38 7.08016C12.51 7.13016 12.61 7.20012 12.71 7.29012C12.8 7.39012 12.87 7.50014 12.93 7.62014C12.98 7.74014 13 7.87014 13 8.00014C13 8.26014 12.9 8.52016 12.71 8.71016C12.61 8.80016 12.51 8.87012 12.38 8.92012C12.01 9.08012 11.57 8.99016 11.29 8.71016C11.2 8.61016 11.13 8.51015 11.08 8.38015C11.03 8.26015 11 8.13014 11 8.00014C11 7.87014 11.03 7.74014 11.08 7.62014C11.13 7.50014 11.2 7.39012 11.29 7.29012C11.48 7.10012 11.73 7.00014 12 7.00014Z" fill="#002859" />
+                                    </svg>
+
+                                    <span className=" text-sm">Etiqueta de destino: 255716461</span>
+                                    <button className=" ml-2 text-blue-600 hover:text-blue-700">
+                                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path
+                                                strokeWidth="2"
+                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    ) */

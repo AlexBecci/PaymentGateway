@@ -1,7 +1,8 @@
 'use client';
 
-import { PaymentForm } from "./components/create-payment";
-import { Modal } from "./components/Modal";
+import { CreatePayment } from "./components/create-payment";
+import CurrencyList from "./components/CurrencyList";
+import MainLayout from "./pages/MainLayout";
 
 export default function Home() {
   return (
@@ -12,9 +13,13 @@ export default function Home() {
 }
 
 function ModuleMain() {
+
   return (
     <div className="tracking-wide  ">
-      <PaymentForm />
+      <MainLayout>
+        {/* <CurrencyList /> */}
+        <CreatePayment />
+      </MainLayout>
     </div>
   );
 }
