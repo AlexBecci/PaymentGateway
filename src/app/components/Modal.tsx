@@ -21,18 +21,13 @@ export const Modal = ({ state }: ModalProps) => {
                         </svg>
                     </div>
                 )}
-
-
-
                 {/* Title */}
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">¡Pago {state ? 'completado' : 'cancelado'}!</h2>
-
                 {/* Description */}
                 <p className="text-gray-500 text-sm mb-6">
                     Lorem ipsum dolor sit amet consectetur. Laoreet blandit auctor et varius dolor elit facilisi enim. Nulla ut et
                     nunc.
                 </p>
-
                 {/* Button */}
                 <button className="w-full bg-blue-600 text-white rounded-md py-2.5 text-sm font-medium hover:bg-blue-700 transition-colors">
                     Crear nuevo pago

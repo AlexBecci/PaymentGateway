@@ -16,10 +16,3 @@ export default function MainLayout({ children }: MainLayoutProps) {
     );
 }
 
-const Header = () => {
-    return (
-        <div>
-            <h1>Bitnovo Payment Gateway</h1>
-        </div>
-    )
-}

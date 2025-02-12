@@ -17,7 +17,6 @@ function ModuleMain() {
   return (
     <div className="tracking-wide  ">
       <MainLayout>
-        {/* <CurrencyList /> */}
         <CreatePayment />
       </MainLayout>
     </div>
