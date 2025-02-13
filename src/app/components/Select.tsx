@@ -3,6 +3,7 @@ import { CgSearch } from "react-icons/cg";
 import { IoIosArrowDown, IoIosArrowForward, IoMdClose } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { CurrencyDTO } from "../types";
+import axios from "axios";
 
 
 
@@ -10,7 +11,7 @@ interface SelectProps {
     onCurrencySelect: (currency: CurrencyDTO) => void
 }
 export const Select = ({ onCurrencySelect }: SelectProps) => {
-    const data: CurrencyDTO[] = [
+    /* const data: CurrencyDTO[] = [
         {
             "symbol": "BCH_TEST",
             "name": "Bitcoin Cash Test BCH",
@@ -51,7 +52,22 @@ export const Select = ({ onCurrencySelect }: SelectProps) => {
             "image": "https://payments.pre-bnvo.com/media/crytocurrencies/CurrencyXRP_Size36_px_StrokeON.png",
             "blockchain": "XRP_TEST"
         }
-    ]
+    ] */
+    const [data, setData] = useState<CurrencyDTO[]>([]);
+
+    const fetchCurrencies = async () => {
+        try {
+            const response = await axios.get('/api/currencies');
+            console.log(response.data);
+            setData(response.data);
+            if (response.data.length > 0) {
+                setSelectedCurrency(response.data[0]);
+                onCurrencySelect(response.data[0]);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     const [selectedCurrency, setSelectedCurrency] = useState(data[0]); // Selecciona la primera por defecto
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
@@ -71,8 +87,10 @@ export const Select = ({ onCurrencySelect }: SelectProps) => {
 
     useEffect(() => {
         console.log(selectedCurrency)
+        fetchCurrencies()
         onCurrencySelect(selectedCurrency)
     }, [])
+
 
     return (
         <>

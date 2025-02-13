@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from "react"
 import { API_URL, DEVICE_ID } from "../utils/const";
 import axios from "axios";
@@ -13,59 +15,69 @@ const CurrencyList = () => {
     const [currencies, setCurrencies] = useState<Currency[] | null>(null)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchCurrencies = async () => {
-        if (DEVICE_ID === undefined)
-            throw new Error("Device ID is not defined")
+    const fetchData = async () => {
         try {
-            const response = await fetch(`${API_URL}/api/v1/currencies`, {
-                credentials: 'include' as RequestCredentials, headers: {
-                    'X-Device-Id': DEVICE_ID,
-                    'Access-Control-Allow-Origin': '*', // Esto es necesario para que funcione en desarrollo
-                    'Content-Type': 'application/json',
-                },
-                mode: 'cors' as RequestMode
-            }) // Llamamos a la API que creaste en el backend
-            console.log('RESPONSEEE---->', response)
-            if (!response.ok) {
-                throw new Error('Error fetching currencies')
+            const response = await axios.get('/api/currencies');
+            console.log(response.data);
+            setCurrencies(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    /*     const fetchCurrencies = async () => {
+            if (DEVICE_ID === undefined)
+                throw new Error("Device ID is not defined")
+            try {
+                const response = await fetch(`${API_URL}/api/v1/currencies`, {
+                    credentials: 'include' as RequestCredentials, headers: {
+                        'X-Device-Id': DEVICE_ID,
+                        'Access-Control-Allow-Origin': '*', // Esto es necesario para que funcione en desarrollo
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors' as RequestMode
+                }) // Llamamos a la API que creaste en el backend
+                console.log('RESPONSEEE---->', response)
+                if (!response.ok) {
+                    throw new Error('Error fetching currencies')
+                }
+                const data: Currency[] = await response.json() // Definimos el tipo de respuesta
+                setCurrencies(data)
+            } catch (error) {
+                console.log('ERROOOOORRR', error)
+                setError(error instanceof Error ? error.message : 'Something went wrong')
             }
-            const data: Currency[] = await response.json() // Definimos el tipo de respuesta
-            setCurrencies(data)
-        } catch (error) {
-            console.log('ERROOOOORRR', error)
-            setError(error instanceof Error ? error.message : 'Something went wrong')
+        } */
+    /*     const axiosCurrencies = async () => {
+            if (DEVICE_ID === undefined)
+                throw new Error("Device ID is not defined");
+    
+            try {
+                // Hacemos la solicitud con axios
+                const response = await axios.get(`${API_URL}/api/v1/currencies`, {
+                    headers: {
+                        'X-Device-Id': DEVICE_ID,
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true, // Similar a 'credentials: 'include'' en fetch
+    
+                });
+    
+                console.log('RESPONSEEE---->', response);
+    
+                // Asumimos que la respuesta viene en 'data' (conforme al formato de Axios)
+                const data: Currency[] = response.data;
+    
+                setCurrencies(data);
+            } catch (error) {
+                console.log('ERROOOOORRR', error);
+                setError(error instanceof Error ? error.message : 'Something went wrong');
+            }
         }
-    }
-    const axiosCurrencies = async () => {
-        if (DEVICE_ID === undefined)
-            throw new Error("Device ID is not defined");
-
-        try {
-            // Hacemos la solicitud con axios
-            const response = await axios.get(`${API_URL}/api/v1/currencies`, {
-                headers: {
-                    'X-Device-Id': DEVICE_ID,
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true, // Similar a 'credentials: 'include'' en fetch
-
-            });
-
-            console.log('RESPONSEEE---->', response);
-
-            // Asumimos que la respuesta viene en 'data' (conforme al formato de Axios)
-            const data: Currency[] = response.data;
-
-            setCurrencies(data);
-        } catch (error) {
-            console.log('ERROOOOORRR', error);
-            setError(error instanceof Error ? error.message : 'Something went wrong');
-        }
-    }
-
+     */
     useEffect(() => {
+        fetchData()
         /* fetchCurrencies() */
-        axiosCurrencies()
+        /*  axiosCurrencies() */
     }, []) // Este hook solo se ejecuta una vez cuando el componente se monta
 
     if (error) {

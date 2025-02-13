@@ -1,8 +1,7 @@
 'use client';
 
 import { CreatePayment } from "./components/create-payment";
-import CurrencyList from "./components/CurrencyList";
-import MainLayout from "./pages/MainLayout";
+import MainLayout from "./components/MainLayout";
 
 export default function Home() {
   return (

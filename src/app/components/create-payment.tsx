@@ -70,7 +70,6 @@ export const CreatePayment = () => {
                             />
                             {errors.importe && <p className="text-red-500 text-xs">{errors.importe.message}</p>}
                         </div>
-                        {/* Custom dropdown para seleccionar la moneda */}
                         <Select onCurrencySelect={setSelectedCurrency} />
                         <div className="space-y-2">
                             <label className="block text-sm text-[#002859] font-semibold">Concepto</label>

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Footer } from '../components/Footer';
+import { Footer } from './Footer';
 
 interface MainLayoutProps {
     children: ReactNode;
